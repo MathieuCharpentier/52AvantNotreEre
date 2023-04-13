@@ -9,6 +9,8 @@ public class Signin : MonoBehaviour
     public TMP_InputField lname;
     public TMP_InputField fname;
     public TMP_InputField mail;
+    public TMP_InputField ludiname;
+    public TMP_InputField spe;
     public MySQLData db;
 
     public void onSubmit()
@@ -27,5 +29,12 @@ public class Signin : MonoBehaviour
             mail.text = "";
             lname.placeholder.GetComponent<Text>().text = "Cet utilisateur éxiste déjà, réessayez";
         }
+    }
+
+    public void createLudi()
+    {
+        db.createLudi(ludiname.text, spe.text);
+        PlayerStat.ludis.Add(new Ludi(Random.Range(0, 99999), ludiname.text, spe.text));
+        db.getUserLudis();
     }
 }
